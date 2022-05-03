@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "507758661249",
+    "project_id": "emailproject-a174c",
+    "storage_bucket": "emailproject-a174c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507758661249:android:01735f3e6cd160bc9fc780",
+        "android_client_info": {
+          "package_name": "com.example.app_email"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507758661249-ljvrl613e9fd55petm8i27mffqcgdla4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrro3Aq8HUe_vb-bpVeqdo5tNqF7dGGB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507758661249-ljvrl613e9fd55petm8i27mffqcgdla4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
