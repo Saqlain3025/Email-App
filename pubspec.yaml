@@ -39,8 +39,9 @@ dependencies:
   firebase_auth: ^3.3.13
   cloud_firestore: ^3.1.11
   flutter_spinkit: ^5.1.0
-  flutter_secure_storage: ^5.0.2
   shared_preferences: ^2.0.13
+  flutter_local_notifications: ^9.5.0
+  flutter_screenutil: ^5.5.1
   
 
 dev_dependencies:
@@ -68,6 +69,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logo3.png
+    - assets/tank1.png
     - assets/tank2.png
     - assets/tank3.png
     - assets/tank4.png

@@ -1,3 +1,4 @@
+import 'package:app_email/services/notification.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -28,22 +29,30 @@ class _StatusState extends State<Status> {
           dynamic data = snapshot.data;
 
           var status = data['status'];
-          var m1 = "assets/tank4.png";
-
-          if (status == 0 || status <= 14) {
+          var m1 = "assets/tank1.png";
+          if (status == 0 || status == null) {
+            m1 = "assets/tank1.png";
+          } else if (status == 1 || status <= 14) {
             m1 = "assets/tank2.png";
+            NotificationService().showNotification();
           } else if (status == 15 || status <= 29) {
             m1 = "assets/tank3.png";
+            NotificationService().cancelAllNotifications();
           } else if (status == 30 || status <= 44) {
             m1 = "assets/tank4.png";
+            NotificationService().cancelAllNotifications();
           } else if (status == 45 || status <= 59) {
             m1 = "assets/tank5.png";
+            NotificationService().cancelAllNotifications();
           } else if (status == 60 || status <= 74) {
             m1 = "assets/tank6.png";
+            NotificationService().cancelAllNotifications();
           } else if (status == 75 || status <= 89) {
             m1 = "assets/tank7.png";
+            NotificationService().cancelAllNotifications();
           } else if (status == 90 || status <= 100) {
             m1 = "assets/tank8.png";
+            NotificationService().cancelAllNotifications();
           }
 
           return Stack(

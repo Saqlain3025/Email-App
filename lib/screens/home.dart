@@ -1,8 +1,9 @@
 import 'package:app_email/models/user.dart';
+import 'package:app_email/services/notification.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/auth.dart';
@@ -26,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+
     FirebaseFirestore.instance
         .collection('users')
         .doc(user!.uid)
@@ -90,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             builder: (context) => LoginScreen()));
                         String value = '';
                         value = prefs.getString('email')!;
-                      })
+                      }),
                 ]),
           ),
         ),
