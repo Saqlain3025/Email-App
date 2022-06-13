@@ -1,23 +1,20 @@
+import 'package:app_email/screens/login.dart';
 import 'package:app_email/services/loading.dart';
-import 'package:app_email/supplier/screens/supplier_home.dart';
-import 'package:app_email/supplier/screens/supplier_home_navigator.dart';
+import 'package:app_email/services/toggle.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:app_email/supplier/screens/supplier_login.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'home.dart';
-import 'registeration.dart';
-
-class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class SupplierLogin extends StatefulWidget {
+  SupplierLogin({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SupplierLogin> createState() => _SupplierLoginState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SupplierLoginState extends State<SupplierLogin> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool loading = false;
 
@@ -97,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final loginButton = Material(
       elevation: 10,
-      color: Colors.blueGrey,
+      color: Colors.blue,
       borderRadius: const BorderRadius.all(
         Radius.circular(30),
       ),
@@ -117,7 +114,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
-    // Toggle button
     final toggle = Container(
       padding: EdgeInsets.all(2),
       width: 150,
@@ -140,12 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
               children: const <Widget>[
                 Icon(
                   Icons.home,
-                  color: Colors.blue,
+                  color: Colors.grey,
                 ), // <-- Icon
-                Text("Consumer",
-                    style: TextStyle(
-                      color: Colors.blue,
-                    )), // <-- Text
+                Text("Consumer"), // <-- Text
               ],
             ),
           ),
@@ -159,17 +152,20 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(width: 10),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MainPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SupplierLogin()));
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const <Widget>[
                 Icon(
                   Icons.directions_bus,
-                  color: Colors.grey,
+                  color: Colors.blue,
                 ), // <-- Icon
-                Text("Supplier"), // <-- Text
+                Text("Supplier",
+                    style: TextStyle(
+                      color: Colors.blue,
+                    )), // <-- Text
               ],
             ),
           ),
@@ -199,6 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fit: BoxFit.contain,
                           ),
                         ),
+                        Text("Supplier"),
                         const SizedBox(
                           height: 50,
                         ),
@@ -220,11 +217,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             const Text("Don't have an account? "),
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            RegisterationScreen()));
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             RegisterationScreen()));
                               },
                               child: const Text(
                                 "SignUP",
@@ -258,8 +255,8 @@ class _LoginScreenState extends State<LoginScreen> {
       final prefs = await SharedPreferences.getInstance();
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()));
+      // Navigator.of(context).pushReplacement(
+      //     MaterialPageRoute(builder: (context) => HomeScreen()));
       await prefs.setString('email', userCredential.user!.uid);
     } on FirebaseAuthException catch (error) {
       switch (error.code) {

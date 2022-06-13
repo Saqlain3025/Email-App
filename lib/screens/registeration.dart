@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 import '../models/user.dart';
 
@@ -19,9 +20,9 @@ class RegisterationScreen extends StatefulWidget {
 
 class _RegisterationScreenState extends State<RegisterationScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final databaseReference = FirebaseDatabase.instance.ref();
   final _formKey = GlobalKey<FormState>();
-  late final String uid;
+
   bool loading = false;
 
   TextEditingController firstNameController = new TextEditingController();
@@ -30,9 +31,15 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
   TextEditingController passwordController = new TextEditingController();
   final TextEditingController conformPasswordController =
       new TextEditingController();
+  // User? user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
+    final record = databaseReference.child('status');
+    record.set({
+      'tanki_status': 0,
+    });
+
     final firstNameField = TextFormField(
       autofocus: false,
       keyboardType: TextInputType.name,
@@ -316,11 +323,13 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
 
     final CollectionReference userCollection =
         FirebaseFirestore.instance.collection('users');
+
     await userCollection
         .doc(user.uid)
         .set(userModel.toMap())
         .then((value) async {
       final prefs = await SharedPreferences.getInstance();
+
       Navigator.pushAndRemoveUntil(
           (context),
           MaterialPageRoute(builder: (context) => HomeScreen()),
